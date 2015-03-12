@@ -7,6 +7,7 @@ import os
 
 from thumbor.result_storages import BaseStorage
 from thumbor.utils import logger
+from thumbor.engines import BaseEngine
 
 from boto.s3.bucket import Bucket
 from boto.s3.key import Key
@@ -34,7 +35,7 @@ class Storage(BaseStorage):
         file_abspath = self.normalize_path(self.context.request.url)
         file_key=Key(self.storage)
         file_key.key = file_abspath
-
+        file_key.content_type = BaseEngine.get_mimetype(bytes) or 'application/octet-stream'
         file_key.set_contents_from_string(bytes,
             encrypt_key = self.context.config.get('S3_STORAGE_SSE', default=False),
             reduced_redundancy = self.context.config.get('S3_STORAGE_RRS', default=False)
