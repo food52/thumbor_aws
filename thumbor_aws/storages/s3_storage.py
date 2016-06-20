@@ -34,7 +34,6 @@ class Storage(BaseStorage):
 
         file_key=Key(self.storage)
         file_key.key = file_abspath
-        file_key.metadata['Cache-Control'] = 'max-age=604800,public'
         file_key.set_contents_from_string(bytes,
             encrypt_key = self.context.config.get('S3_STORAGE_SSE', default=False),
             reduced_redundancy = self.context.config.get('S3_STORAGE_RRS', default=False)
