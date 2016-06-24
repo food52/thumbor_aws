@@ -36,7 +36,9 @@ class Storage(BaseStorage):
         file_key=Key(self.storage)
         file_key.key = file_abspath
         file_key.content_type = BaseEngine.get_mimetype(bytes) or 'application/octet-stream'
-        file_key.metadata['Cache-Control'] = 'max-age=604800,public'
+        cache_control = self.context.config.get('RESULT_STORAGE_CACHE_CONTROL')
+        if cache_control is not None:
+            file_key.metadata['Cache-Control'] = cache_control
         file_key.set_contents_from_string(bytes,
             encrypt_key = self.context.config.get('S3_STORAGE_SSE', default=False),
             reduced_redundancy = self.context.config.get('S3_STORAGE_RRS', default=False)
