@@ -4,17 +4,17 @@ AWS as a source of originals and a sink for results.
 Our Changes
 ===========
 
-1. Don't hash the entire results path.  By defualt, when thumbor saves the result to S3 for an image path like:
+1. Don't hash the entire results path.  By default, when thumbor saves the
+   result to S3 for an image path like:
 
 ```
 /asdlkfjasdfa=/100x100/test.png
 ```
 
-It hashes the entire key.  This interferes with out redirecting from S3 to
-thumbor.  So we save the result in S3 using a path that's in cleartest after
-the first path component (the cryptographic signature).
+it hashes the entire key.  This interferes with our redirecting from S3 to
+thumbor.  So we save the result in S3 using a cleartext version of the path.
 
-2. We explicitly set content type when saving to S3.
+2. We explicitly set mime type when saving to S3.
 
 3. We explicitly set the cache-control headers.
 
