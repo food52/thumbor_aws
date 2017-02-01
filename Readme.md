@@ -1,4 +1,29 @@
-Thumbor AWS
+This is the Food52 fork the the thumbor AWS plugin, which lets thumbor use
+AWS as a source of originals and a sink for results.
+
+Our Changes
+===========
+
+1. Don't hash the entire results path.  By defualt, when thumbor saves the result to S3 for an image path like:
+
+```
+/asdlkfjasdfa=/100x100/test.png
+```
+
+It hashes the entire key.  This interferes with out redirecting from S3 to
+thumbor.  So we save the result in S3 using a path that's in cleartest after
+the first path component (the cryptographic signature).
+
+2. We explicitly set content type when saving to S3.
+
+3. We explicitly set the cache-control headers.
+
+Branches, Tags
+==============
+
+In production we currently deploy `f52stable-v1`.
+
+Original Readme Follows
 ===========
 
  * thumbor_aws.loaders.s3_loader
