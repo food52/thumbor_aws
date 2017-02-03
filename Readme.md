@@ -4,7 +4,7 @@ AWS as a source of originals and a sink for results.
 Our Changes
 ===========
 
-1. Don't hash the entire results path.  By default, when thumbor saves the
+1. Don't hash the results path.  By default, when thumbor saves the
    result to S3 for an image path like:
 
 ```
