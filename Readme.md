@@ -21,7 +21,7 @@ thumbor.  So we save the result in S3 using a cleartext version of the path.
 Branches, Tags
 ==============
 
-In production we currently deploy `f52stable-v1`.
+In production we currently deploy `master`.
 
 Original Readme Follows
 ===========
